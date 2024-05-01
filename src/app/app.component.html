@@ -1,42 +1,62 @@
-
 <div class="main-conteiner">
-  <app-header></app-header>
 
-  <h1>{{title}}</h1>
-  
-  <!--
-    <mat-sidenav-container>
-        <mat-sidenav #sidenav class="w_p10">
-            <mat-list role="list">
-                <mat-list-item (click)="sidenav.toggle()">
-                    <a href="/"><mat-icon>home</mat-icon></a>
+  <app-header [sidenav]="sidenav"> </app-header>
 
-                </mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
-              </mat-list>
-        </mat-sidenav>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav class="w_p10">
+      <mat-list>
 
-        <mat-sidenav-content>
-            <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-            <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-            <p>Events:</p>
+        
+        <mat-list-item (click)="sidenav.toggle()">
+          <mat-icon>login</mat-icon>
+          <span class="ml_15">
+            <a href="/">Login</a>
+        </span>
+        </mat-list-item>
+        
+        <mat-list-item (click)="sidenav.toggle()">
+          <mat-icon>home</mat-icon>
+          <span class="ml_15">
+            <a href="/">Home</a>
+          </span>
+        </mat-list-item>
 
-            <div class="example-events">
-              @for (e of events; track e) {
-                <div>{{e}}</div>
-              }
-            </div>
+      </mat-list>
+      
+      <!--
+      <mat-list class="w_p10">
+          <mat-list-item>
+              <a href="/"><mat-icon>home</mat-icon>Home</a>
+          </mat-list-item>
+      </mat-list>
+      -->
+    </mat-sidenav>
 
-            <router-outlet></router-outlet>
+    <mat-sidenav-content>
 
-        </mat-sidenav-content>
+      <h1>Implementar Menu</h1>
+      <!--
+      <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
 
-    </mat-sidenav-container>
+      <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
 
--->
-  
-  <app-test></app-test>
+      <p>Events:</p> 
+
+      <div class="example-events">
+        @for (e of events; track e) {
+          <div>{{e}}</div>
+        }
+      </div>
+      -->
+      <router-outlet> </router-outlet>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+  <!-- 
+    <app-test></app-test> 
+  -->
 
     <app-footer></app-footer>
 

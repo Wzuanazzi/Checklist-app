@@ -3,10 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.a:hover{
-    font-size: 18px;
-}
-
 .w_p10{
     width: 20%;
+}
+
+.ml_15{
+    margin-left: 15px;
 }
