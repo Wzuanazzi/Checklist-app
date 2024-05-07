@@ -3,18 +3,21 @@ import { Component } from '@angular/core';
 import { CommonModule, FormStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule, FormsModule,  MaterialModule],
+  imports: [CommonModule, FormsModule,  MaterialModule, RouterLink],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
 
 export class TestComponent {
   
+  status: boolean = true;
+  statusUsuario = "pendente";
   public valorTexto = '';
 
   public showTitle = true;

@@ -21,6 +21,13 @@
 <p><button [disabled]="isDisabled">Botao 1</button></p>
 <p><button (click)="disableButton()">Botao 2</button></p>
 
+<div [ngSwitch]="statusUsuario">
+    <p *ngSwitchCase="'ativo'">O usuário está ativo.</p>
+    <p *ngSwitchCase="'inativo'">O usuário está inativo.</p>
+    <p *ngSwitchCase="'pendente'">O usuário está pendente de aprovação.</p>
+    <p *ngSwitchDefault>O status do usuário é desconhecido.</p>
+</div>
+  
 
 <!--*
 <app-category></app-category> "-->
