@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Category, DataService } from '../category';
-import { EventEmitter } from 'stream';
 
 export interface DialogData {
   actionName: string;
@@ -23,21 +22,16 @@ export class CategoryFormComponent implements OnInit{
   public emitForm: boolean = false;
   public editedData: any;
 
-  
-  @Output() public closeModalWindowsEmitter!: EventEmitter<any> ;
-
   @Input() public actionName = 'Fixo';
   @Input() public editableCategory!: Category;
 
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<CategoryFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dataService: DataService) {
+    @Inject(MAT_DIALOG_DATA) public data: any, ){
 
     if(data.actionName != null) {
         this.actionName = data.actionName
     }
-      
     };
 
   ngOnInit(): void {
@@ -49,17 +43,9 @@ export class CategoryFormComponent implements OnInit{
       });
  }
 
- public save() {
-  // Salvar os dados editados
-
-  // Enviar os dados editados para o serviço de dados
-  this.dataService.sendData(this.editedData);
-}
-
+ 
 public clickCancelar () {
 this.dialogRef.close(false)   
-//this.closeModalWindowsEmitter.emit(false);
-
 }
 
 public clickSalvar () {
@@ -69,7 +55,7 @@ public clickSalvar () {
     const dadosAtualizados : Category = this.categoryForm.value;
 
     console.log(this.categoryForm.value)
-    
+
     console.log("clickSalvar acionado")
 
     // Emita os dados atualizados de volta ao componente pai

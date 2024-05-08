@@ -36,7 +36,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrl: './category.component.css'
  })
 
-export class CategoryComponent implements AfterViewInit{
+export class CategoryComponent {
+  blnEdit !: boolean;
+  
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   
   @ViewChild(MatTable) tableRef!: MatTable<any>;
@@ -48,47 +50,72 @@ export class CategoryComponent implements AfterViewInit{
               private dataService: DataService,
               private cdr: ChangeDetectorRef) { }
   
-  /*
-  openDialog(element: Category | null): void {
-    const dialogRef = this.dialog.open(ElementDialogComponent, {
-      width: '300px',
-      disableClose: true, 
-      data : element === null ? {
-        position: null,
-        name: '',
-        weight: null,
-        symbol: ''
-      } : element
-    });
-    
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != undefined) {
-        this.dataSource.push(result);
-        console.log('O diálogo foi fechado', result);
-        this.tableRef.renderRows();
-      }
-    }); 
-    }
-  */
-
-  ngAfterViewInit() {
-      // Agora você pode acessar a tabela e fazer manipulações
-      //console.log(this.tableRef); // Exemplo de uso: log do objeto MatTable
-      // Você pode chamar métodos e acessar propriedades da tabela a partir daqui
-  } 
-
-  public editElement(inputCategory: Category | null): void  {
+  
+  openDialog(inputCategory: Category | null): void {
       const dialogRef = this.dialog.open(CategoryEditComponent, {
         disableClose: true,
-        data: {editableCategory: inputCategory, actionName: 'Editar'}
+        data: {editableCategory: inputCategory, actionName: this.blnEdit ? 'Editar' : 'Criar'}
+      });
+
+      dialogRef.afterClosed().subscribe(resp => {
+        if (resp !== undefined) {
+          const tableResp : Category = resp;
+
+          if (this.blnEdit && this.dataSource.map(p => p.position).includes(resp.position)) {
+              this.dataSource[resp.position -1] = resp;
+              this.tableRef.renderRows();
+              console.log('Elemento EDITADO!');
+          } 
+          else {
+            
+            const positionExists = this.dataSource.map(p => p.position).includes(resp.position)
+
+            console.log(positionExists);
+
+            if (! this.blnEdit && resp.position > 0) {
+              this.cdr.detectChanges();
+              this.dataSource.push(resp);
+              this.tableRef.renderRows();
+              console.log('Elemento Incluido!');
+            }
+          }
+          
+          // Se os dados foram retornados do modal, atualize o dataSource
+          console.log(tableResp.position)
+          console.log(tableResp.name)
+          console.log(tableResp.weight)
+          console.log(tableResp.symbol)
+
+        } else {
+          console.log('Elemento não EDITADO!');
+        }
+      });
+  }
+ 
+
+  public editElement(inputCategory: Category | null): void  {
+      this.blnEdit = true;
+      this.openDialog(inputCategory);
+    /*
+      const dialogRef = this.dialog.open(CategoryEditComponent, {
+        disableClose: true,
+        data: {editableCategory: inputCategory, actionName: this.blnEdit ? 'Editar' : 'Criar'}
       });
 
       dialogRef.afterClosed().subscribe(resp => {
         if (resp !== undefined) {
           if (this.dataSource.map(p => p.position).includes(resp.position)) {
               this.dataSource[resp.position -1] = resp;
-              this.cdr.detectChanges();
               this.tableRef.renderRows();
+              console.log('Elemento EDITADO!');
+          } 
+          else {
+            if (this.blnEdit) {
+              this.cdr.detectChanges();
+              this.dataSource.push(resp);
+              this.tableRef.renderRows();
+              console.log('Elemento Incluido!');
+            }
           }
           
           // Se os dados foram retornados do modal, atualize o dataSource
@@ -103,7 +130,8 @@ export class CategoryComponent implements AfterViewInit{
           console.log('Elemento não EDITADO!');
         }
       });
-    }
+      */
+  }
 
   public deleteElement(deleteCategory: Category | null): void  {
     this.dialog.open(DialogComponent, {disableClose: true, 
@@ -122,7 +150,11 @@ export class CategoryComponent implements AfterViewInit{
 
   public createElement(inputCategory: Category | null) {
     console.log("create element")
+    this.blnEdit = false;
 
+    this.openDialog(inputCategory);
+
+    /*
     this.dialog.open(CategoryEditComponent, {disableClose: true, 
       data: {editableCategory: inputCategory, actionName: 'Incluir'}}).afterClosed().subscribe(
       resp => {
@@ -137,6 +169,7 @@ export class CategoryComponent implements AfterViewInit{
         console.log('Elemento Cancelado !');
       }
     } 
-  )    
+   )    
+  */
   }
 }
