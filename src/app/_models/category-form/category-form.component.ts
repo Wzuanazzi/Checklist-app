@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { Category, DataService } from '../category';
+import { Category } from '../category';
 
 export interface DialogData {
   actionName: string;

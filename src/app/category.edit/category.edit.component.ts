@@ -15,7 +15,7 @@ import { ElementDialogComponent } from '../_models/element-dialog/element-dialog
 
 export class CategoryEditComponent implements OnInit {
 
-  @Input() public actionName = 'Editar testando';
+  @Input() public actionName = 'Editar';
 
   public editableCategory!: Category;
 

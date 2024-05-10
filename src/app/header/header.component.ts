@@ -12,7 +12,7 @@ import { MaterialModule } from '../material.module';
 
 export class HeaderComponent implements OnInit {
 
-    @Input() sidenav!: MatSidenav
+  @Input() sidenav!: MatSidenav
 
   constructor() {};
 
