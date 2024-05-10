@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -14,12 +14,17 @@ import { MaterialModule } from './material.module';
     styleUrl: './app.component.css',
     imports: [RouterOutlet, ReactiveFormsModule,
       CommonModule,  FooterComponent, HeaderComponent,
-      MaterialModule 
+      MaterialModule
     ],
    
 })
 
-export class AppComponent {
-  public events: string[] = [];
-  public opened: boolean = false;
+export class AppComponent implements OnInit {
+
+  constructor () {
+    
+  }
+
+  ngOnInit(): void {
+  }
 }

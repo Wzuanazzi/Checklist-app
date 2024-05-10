@@ -3,7 +3,7 @@ import { MaterialModule } from '../material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../_models/dialog/dialog.component';
 import { MatInput } from '@angular/material/input';
-import { Category, DataService } from '../_models/category';
+import { Category } from '../_models/category';
 import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { MatTable } from '@angular/material/table';
 import { ElementDialogComponent } from '../_models/element-dialog/element-dialog.component';
@@ -43,18 +43,17 @@ export class CategoryComponent {
   
   @ViewChild(MatTable) tableRef!: MatTable<any>;
 
-  //editedData: any;
   public dataSource = ELEMENT_DATA;
     
   constructor(private dialog: MatDialog, 
-              private dataService: DataService,
               private cdr: ChangeDetectorRef) { }
   
   
   openDialog(inputCategory: Category | null): void {
       const dialogRef = this.dialog.open(CategoryEditComponent, {
         disableClose: true,
-        data: {editableCategory: inputCategory, actionName: this.blnEdit ? 'Editar' : 'Criar'}
+        data: {editableCategory: inputCategory, 
+               actionName: this.blnEdit ? 'Editar' : 'Criar'}
       });
 
       dialogRef.afterClosed().subscribe(resp => {
@@ -73,7 +72,7 @@ export class CategoryComponent {
             console.log(positionExists);
 
             if (! this.blnEdit && resp.position > 0) {
-              this.cdr.detectChanges();
+              //this.cdr.detectChanges();
               this.dataSource.push(resp);
               this.tableRef.renderRows();
               console.log('Elemento Incluido!');

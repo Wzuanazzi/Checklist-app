@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MaterialModule } from '../../material.module';
 import { PeriodicElement } from '../../category/category.component';
 
