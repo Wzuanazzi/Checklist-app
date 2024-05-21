@@ -1,24 +1,56 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 
-export class AutorizacaoService {
+export class AutorizacaoService implements OnInit{
 
-  autorizado = false;
+  private storageKey = 'userState';
 
   constructor() { }
 
+  // Método para verificar se o usuário está autenticado
+  statusLogin() : boolean {
+    console.log("statusLogin");
+    return this.getUserState() !== null;
+   }
+
+  // Método para Carregar storageLocal
   autorizar(){
-    localStorage.setItem("login","SIM");
+    const userState = { login: 'SIM' };
+    this.setUserState(userState);
     }
 
+  // Método para Limpar storageLocal
   deslogar(){
-    localStorage.clear();
+    
+    if (typeof localStorage === 'undefined') {
+      console.warn('localStorage is not available');
+     // return null;
+    }else
+      localStorage?.clear();
   }
 
-  statusLogin(){
-    return !!localStorage.getItem("login");
+   // Método para obter o estado do usuário 
+   getUserState(): any {
+    if (typeof localStorage === 'undefined') {
+      console.warn('localStorage is not available');
+      return null;
+    }
+  
+    console.log("getUserState");
+    const state = localStorage.getItem(this.storageKey);
+    return state ? JSON.parse(state) : null;
+    
+  }
+
+  // Método para definir o estado do usuário
+  setUserState(state: any): void {
+    console.log("setUserState");
+    localStorage.setItem(this.storageKey, JSON.stringify(state));
+  }
+
+
+  ngOnInit(): void {
+    
   }
 }

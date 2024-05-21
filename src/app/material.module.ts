@@ -10,23 +10,27 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ElementDialogComponent } from './_models/element-dialog/element-dialog.component';
 import { RouterLink } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
+import { MatError, MatFormField, MatInput, MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
     imports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
-              MatTableModule, ElementDialogComponent, RouterLink,
+              MatTableModule, RouterLink,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav ],
+              MatInputModule, MatDividerModule, MatSidenav,
+              ReactiveFormsModule, CommonModule, MatError, ReactiveFormsModule,
+            MatFormField, MatInput ],
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
-              MatTableModule, ElementDialogComponent, RouterLink,
+              MatTableModule, RouterLink,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav ], 
+              MatInputModule, MatDividerModule, MatSidenav,
+              ReactiveFormsModule, CommonModule, MatError, ReactiveFormsModule,
+              MatFormField, MatInput ], 
 })
 
 export class MaterialModule {

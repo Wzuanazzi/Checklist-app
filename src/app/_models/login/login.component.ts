@@ -10,26 +10,39 @@ import { AutorizacaoService } from '../../_service/autorizacao.service';
   styleUrl: './login.component.css'
 })
 
-
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable({  providedIn: 'root' })
 
 export class LoginComponent implements OnInit{
 
   constructor(private autorizacaoService:AutorizacaoService) {  }
 
-  descricaoLogin = () =>
-    this.autorizacaoService.statusLogin() ? "Estou Autorizado" : "Não Autorizado";
-  ngOnInit(): void {
-   }
+  public descricaoLogin !: string
 
+  ngOnInit(): void {
+    //this.descricaoLogin =
+//      this.autorizacaoService.statusLogin() ? "Estou Autorizado" : "Não Autorizado";
+
+      if (this.autorizacaoService.statusLogin()) {
+        // O usuário está autenticado, faça algo
+        this.descricaoLogin = "Estou Autorizado" ;
+
+      } else {
+        // O usuário não está autenticado, talvez redirecione para a página de login
+        this.descricaoLogin = "Não Autorizado";
+      }
+
+      console.log(this.descricaoLogin);
+  }
+
+  
   clickLogin(){
+    //if (this.autorizacaoService.statusLogin()) {
     if (this.autorizacaoService.statusLogin()) {
       this.autorizacaoService.deslogar();
+      this.descricaoLogin = "Não Autorizado";
     }else{
       this.autorizacaoService.autorizar();
+      this.descricaoLogin = "Autorizado";
     }
   };
 

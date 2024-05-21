@@ -6,7 +6,6 @@ import { MatInput } from '@angular/material/input';
 import { Category } from '../_models/category';
 import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { MatTable } from '@angular/material/table';
-import { ElementDialogComponent } from '../_models/element-dialog/element-dialog.component';
 
 export interface PeriodicElement {
   position: number;
@@ -59,11 +58,12 @@ export class CategoryComponent {
       dialogRef.afterClosed().subscribe(resp => {
         if (resp !== undefined) {
           const tableResp : Category = resp;
+          console.log(resp.position -1);
 
           if (this.blnEdit && this.dataSource.map(p => p.position).includes(resp.position)) {
               this.dataSource[resp.position -1] = resp;
               this.tableRef.renderRows();
-              console.log('Elemento EDITADO!');
+              console.log('Elemento Editado!');
           } 
           else {
             

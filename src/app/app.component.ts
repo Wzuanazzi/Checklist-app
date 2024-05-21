@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
@@ -19,6 +19,8 @@ import { MaterialModule } from './material.module';
    
 })
 
+@Injectable({ providedIn: 'root' })
+
 export class AppComponent implements OnInit {
 
   constructor () {
@@ -26,5 +28,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    if (typeof localStorage === 'undefined') {
+      console.log('localStorage is not available');
+    } else {
+      console.log('localStorage clear');
+      localStorage.clear();
+    }
+               
   }
 }

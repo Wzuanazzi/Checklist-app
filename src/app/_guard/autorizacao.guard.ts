@@ -16,3 +16,21 @@ export const autorizacaoGuard = () => {
       return false;
   }
 };
+
+export class AutorizacaoGuard {
+
+    constructor(private authService: AutorizacaoService, private router: Router) { }
+  
+    canActivate(): boolean {
+      // Certifique-se de que o localStorage está limpo antes de verificar a autenticação
+      localStorage.clear();
+      console.log('localStorage has been cleared by AuthGuard.');
+  
+      if (this.authService.statusLogin()) {
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }
+  }

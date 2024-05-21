@@ -2,13 +2,12 @@ import { Component, Inject, OnInit, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryFormComponent } from '../_models/category-form/category-form.component';
 import { Category } from '../_models/category';
-import { ElementDialogComponent } from '../_models/element-dialog/element-dialog.component';
 
 
 @Component({
   selector: 'app-category.edit',
   standalone: true,
-  imports: [CategoryFormComponent, ElementDialogComponent],
+  imports: [CategoryFormComponent],
   templateUrl: './category.edit.component.html',
   styleUrl: './category.edit.component.css'
 })
@@ -38,10 +37,10 @@ export class CategoryEditComponent implements OnInit {
   }
 
   public closeModalWindows($event: any) {
+    console.log("close modal windows event");
     if($event){
       this.dialoRef.close();
     }
-    console.log("close modal windows");
   }
 
 }
