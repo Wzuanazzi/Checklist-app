@@ -15,7 +15,7 @@
 
                 <ng-container matColumnDef="position">
                   <th mat-header-cell *matHeaderCellDef> Item </th>
-                  <td mat-cell *matCellDef="let element; let index"> {{element.position}} </td>
+                  <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
                 </ng-container>
               
                 <!-- Name Column -->
