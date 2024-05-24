@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../material.module';
 
 @Component({
@@ -10,5 +10,13 @@ import { MaterialModule } from '../material.module';
 })
 
 export class HomeComponent {
+
+  constructor( ) {  }
+
+  
+  ngOnInit() {
+    
+  }
+  
 
 }

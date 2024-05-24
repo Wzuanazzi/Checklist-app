@@ -11,9 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { MatError, MatFormField, MatInput, MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -23,16 +24,20 @@ import { CommonModule } from '@angular/common';
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
               MatInputModule, MatDividerModule, MatSidenav,
               ReactiveFormsModule, CommonModule, MatError, ReactiveFormsModule,
-            MatFormField, MatInput ],
+              MatFormField, MatInput, MatMenuModule ],
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
               MatInputModule, MatDividerModule, MatSidenav,
               ReactiveFormsModule, CommonModule, MatError, ReactiveFormsModule,
-              MatFormField, MatInput ], 
+              MatFormField, MatInput, MatMenuModule ], 
 })
 
 export class MaterialModule {
-  
+
+  constructor() {
+    
+  }
+ 
  }

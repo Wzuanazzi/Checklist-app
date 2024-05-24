@@ -80,10 +80,11 @@ export class CategoryComponent {
           }
           
           // Se os dados foram retornados do modal, atualize o dataSource
+          /*
           console.log(tableResp.position)
           console.log(tableResp.name)
           console.log(tableResp.weight)
-          console.log(tableResp.symbol)
+          console.log(tableResp.symbol)*/
 
         } else {
           console.log('Elemento não EDITADO!');
@@ -95,42 +96,7 @@ export class CategoryComponent {
   public editElement(inputCategory: Category | null): void  {
       this.blnEdit = true;
       this.openDialog(inputCategory);
-    /*
-      const dialogRef = this.dialog.open(CategoryEditComponent, {
-        disableClose: true,
-        data: {editableCategory: inputCategory, actionName: this.blnEdit ? 'Editar' : 'Criar'}
-      });
-
-      dialogRef.afterClosed().subscribe(resp => {
-        if (resp !== undefined) {
-          if (this.dataSource.map(p => p.position).includes(resp.position)) {
-              this.dataSource[resp.position -1] = resp;
-              this.tableRef.renderRows();
-              console.log('Elemento EDITADO!');
-          } 
-          else {
-            if (this.blnEdit) {
-              this.cdr.detectChanges();
-              this.dataSource.push(resp);
-              this.tableRef.renderRows();
-              console.log('Elemento Incluido!');
-            }
-          }
-          
-          // Se os dados foram retornados do modal, atualize o dataSource
-          const tableResp : Category = resp;
-
-          console.log(tableResp.name)
-          console.log(tableResp.position)
-          console.log(tableResp.weight)
-          console.log(tableResp.symbol)
-
-        } else {
-          console.log('Elemento não EDITADO!');
-        }
-      });
-      */
-  }
+    }
 
   public deleteElement(deleteCategory: Category | null): void  {
     this.dialog.open(DialogComponent, {disableClose: true, 
@@ -153,22 +119,5 @@ export class CategoryComponent {
 
     this.openDialog(inputCategory);
 
-    /*
-    this.dialog.open(CategoryEditComponent, {disableClose: true, 
-      data: {editableCategory: inputCategory, actionName: 'Incluir'}}).afterClosed().subscribe(
-      resp => {
-      if(resp){
-        console.log('Elemento incluido !');
-        this.cdr.detectChanges();
-
-        this.dataSource.push(resp);
-        
-        this.tableRef.renderRows();
-      } else {
-        console.log('Elemento Cancelado !');
-      }
-    } 
-   )    
-  */
   }
 }

@@ -5,6 +5,7 @@ import { CategoryComponent } from './category/category.component';
 import { TestComponent } from './test/test.component';
 import { LoginComponent } from './_models/login/login.component';
 import { autorizacaoGuard } from './_guard/autorizacao.guard';
+import { ElementComponent } from './element/element.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'teste', component: TestComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'element', component: ElementComponent },
     { path: '**', component: HomeComponent}
 ];

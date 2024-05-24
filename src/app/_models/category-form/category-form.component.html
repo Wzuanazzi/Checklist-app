@@ -27,6 +27,9 @@
                 <mat-form-field>
                     <mat-label>Peso</mat-label>
                     <input matInput type="text" formControlName = "weight">
+                    @if ("categoryForm.get('weight').errors.required") {
+                        <mat-error>Nome é <strong>obrigatório</strong></mat-error>
+                      }
                 </mat-form-field>
 
                 <mat-form-field>

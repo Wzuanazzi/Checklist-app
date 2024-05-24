@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
-import { Category } from '../category';
 
 @Component({
   selector: 'app-dialog',
@@ -34,7 +33,7 @@ export class DialogComponent implements OnInit{
   }
 
   public dialogMsg: string = 'Confirma esta Ação';
-  public leftButtonLabel: string = 'Cancelar 2';
+  public leftButtonLabel: string = 'Cancelar';
   public rightButtonLabel: string = 'Confirmar';
 
   public clickLeftButton() {

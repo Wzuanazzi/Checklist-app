@@ -14,8 +14,8 @@ import { Header2Component } from "./header2/header2.component";
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     imports: [RouterOutlet, ReactiveFormsModule,
-        CommonModule, FooterComponent, HeaderComponent,
-        MaterialModule, Header2Component]
+              CommonModule, FooterComponent, HeaderComponent,
+              MaterialModule, Header2Component]
 })
 
 @Injectable({ providedIn: 'root' })

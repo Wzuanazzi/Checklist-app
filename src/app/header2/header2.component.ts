@@ -1,19 +1,16 @@
-import { Component, Input, } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbar } from '@angular/material/toolbar';
+import { Component, Input, ChangeDetectorRef} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { MaterialModule } from '../material.module';
+import { GlobalService } from '../_service/global.service';
 
 @Component({
   selector: 'app-header2',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatToolbar,
-            MatSidenav, MatIcon, RouterLink],
+  imports: [MaterialModule],
   templateUrl: './header2.component.html',
   styleUrl: './header2.component.css'
 })
+
 export class Header2Component {
 
   @Input() sidenav!: MatSidenav
@@ -21,4 +18,19 @@ export class Header2Component {
     this.sidenav.toggle();    
   } 
 
+  constructor(private globalService: GlobalService,
+              private cdr: ChangeDetectorRef
+              ) {  }
+  
+  get loginRead() {
+    return this.globalService.getLoginRead();
+  }
+
+  checkLoginRead() {
+    this.loginRead
+  }
+  
+  ngOnInit() {
+      }
+    
 }

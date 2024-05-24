@@ -11,6 +11,7 @@ export class AutorizacaoService implements OnInit{
   // Método para verificar se o usuário está autenticado
   statusLogin() : boolean {
     console.log("statusLogin");
+
     return this.getUserState() !== null;
    }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { AutorizacaoService } from '../../_service/autorizacao.service';
+import { GlobalService } from '../../_service/global.service';
 
 @Component({
   selector: 'app-login',
@@ -14,18 +15,17 @@ import { AutorizacaoService } from '../../_service/autorizacao.service';
 
 export class LoginComponent implements OnInit{
 
-  constructor(private autorizacaoService:AutorizacaoService) {  }
+  constructor(private autorizacaoService:AutorizacaoService,
+              private globalService: GlobalService, // Injetando o GlobalService
+              private materialModule: MaterialModule // Injetando o MaterialModule
+            ) {  }
 
   public descricaoLogin !: string
 
   ngOnInit(): void {
-    //this.descricaoLogin =
-//      this.autorizacaoService.statusLogin() ? "Estou Autorizado" : "Não Autorizado";
-
       if (this.autorizacaoService.statusLogin()) {
         // O usuário está autenticado, faça algo
         this.descricaoLogin = "Estou Autorizado" ;
-
       } else {
         // O usuário não está autenticado, talvez redirecione para a página de login
         this.descricaoLogin = "Não Autorizado";
@@ -40,38 +40,13 @@ export class LoginComponent implements OnInit{
     if (this.autorizacaoService.statusLogin()) {
       this.autorizacaoService.deslogar();
       this.descricaoLogin = "Não Autorizado";
+      this.globalService.setLoginRead(false); // Atualizando o valor de loginread
     }else{
       this.autorizacaoService.autorizar();
       this.descricaoLogin = "Autorizado";
+      this.globalService.setLoginRead(true); // Atualizando o valor de loginread
     }
   };
-
-  /*
-  loginAutotizado = false;
-
-  ngOnInit(): void {
-      this.statusLogin();
-  }
-  
-  
-  descricaoLogin = () => this.loginAutotizado ? "Estou Autorizado" : "Não Autorizado";
-  */
-
-  /*
-  statusLogin(){
-    this.loginAutotizado = !!localStorage.getItem("login");
-  
-  clickLogin(){
-    if(this.loginAutotizado) {
-      localStorage.clear();
-      console.log("clear login");
-    }else{
-      localStorage.setItem("login", "SIM")
-      console.log("logado")
-      this.statusLogin();
-    }
-  };
-  */
 }
 
 
