@@ -1,12 +1,14 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import { AutorizacaoService } from '../../_service/autorizacao.service';
 import { GlobalService } from '../../_service/global.service';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MaterialModule],
+  imports: [MaterialModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,9 +17,12 @@ import { GlobalService } from '../../_service/global.service';
 
 export class LoginComponent implements OnInit{
 
+  //user!: SocialUser;
+  //loggedIn!: boolean;
+
   constructor(private autorizacaoService:AutorizacaoService,
               private globalService: GlobalService, // Injetando o GlobalService
-              private materialModule: MaterialModule // Injetando o MaterialModule
+              //private authService:SocialAuthService
             ) {  }
 
   public descricaoLogin !: string
@@ -30,6 +35,16 @@ export class LoginComponent implements OnInit{
         // O usuário não está autenticado, talvez redirecione para a página de login
         this.descricaoLogin = "Não Autorizado";
       }
+
+      //this.authService.authState.subscribe((user) => {
+      // console.log(user)});
+      
+      /*
+      this.authService.authState.subscribe((user) => {
+        this.user = user;
+        this.loggedIn = (user != null);
+        
+      });*/
 
       console.log(this.descricaoLogin);
   }
@@ -47,6 +62,20 @@ export class LoginComponent implements OnInit{
       this.globalService.setLoginRead(true); // Atualizando o valor de loginread
     }
   };
+
+/*
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFacebook(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+*/
 }
 
 

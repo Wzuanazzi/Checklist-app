@@ -1,35 +1,122 @@
-import { Component } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DialogComponent } from '../_models/dialog/dialog.component';
+import { MaterialModule } from '../material.module';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { Element } from '../_models/Element';
+import { CategoryEditComponent } from '../category.edit/category.edit.component';
+import { CommonModule } from '@angular/common';
+import { ElementService } from '../_service/element.service';
 
 @Component({
   selector: 'app-element',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [ MaterialModule, CategoryEditComponent, CommonModule],
   templateUrl: './element.component.html',
-  styleUrl: './element.component.css'
+  styleUrl: './element.component.css',
+  providers: [ElementService],
 })
-export class ElementComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+
+export class ElementComponent implements OnInit {
+  blnEdit !: boolean;
+
+  elements: Element[] = [];
+  newElement: Element = { id: 0, position: 0, name: '', weight: 0, symbol: '' };
+  editElement: Element = { id: 0, position: 0, name: '', weight: 0, symbol: '' };
+
+  displayedColumns: string[] = ['id', 'position', 'name', 'weight', 'symbol', 'actions'];
+
+  dataSource!: MatTableDataSource<Element>;
+
+  @ViewChild(MatTable) tableRef!: MatTable<any>;
+
+  constructor(private dialog: MatDialog,
+              public elementService : ElementService,  ) { 
+      this.dataSource = new MatTableDataSource<Element>();
+    }
+
+  ngOnInit(): void {
+    this.getElements();
+  }
+
+ 
+  getElements(): void {
+    this.elementService.getElement().subscribe((data: Element[]) => {
+      {this.dataSource.data = data};
+    }, (error) => {
+      console.error('Erro ao obter elementos:', error);
+    });
+  }
+
+  public createElement(createElement: Element | null) : void {
+    console.log("create element")
+    this.blnEdit = false;
+    this.openDialog(createElement);
+  }
+
+  public editElements(editElement: Element | null): void  {
+    this.blnEdit = true;
+    this.openDialog(editElement);
+  }
+
+  deleteElement(id: number): void {
+    this.dialog.open(DialogComponent, {disableClose: true, 
+      data: {dialogMsg: 'Confirma a exclusão do registro ?', 
+            leftButtonLabel: 'Sim', rightButtonLabel: 'Não'}})
+            .afterClosed().subscribe(
+      resp => { if(resp){
+           console.log('Elemento não apagado !');
+      } else {
+        console.log(id);
+  
+        this.elementService.deleteElement(id).subscribe(() => {
+          this.getElements();
+          console.log('Elemento apagado !');
+        }, (error) => {
+          console.error('Erro ao deletar usuário:', error);
+        });
+   
+      }
+    }  
+    );
+  }
+  
+  openDialog(inputElement: Element | null): void {
+    const dialogRef = this.dialog.open(CategoryEditComponent, {
+      disableClose: true,
+      data: {editableCategory: inputElement, 
+             actionName: this.blnEdit ? 'Editar' : 'Criar'}
+    });
+
+    dialogRef.afterClosed().subscribe(resp => {
+      if (resp !== undefined) {
+        const tableResp : Element = resp;
+        console.log(resp.position -1);
+
+        if (this.blnEdit && this.dataSource.data.map(p => p.position).includes(resp.position)) {
+            this.elementService.updateElement(resp.id,  resp).subscribe(() => {
+                this.getElements();
+              })
+            
+            console.log('Elemento Editado!');
+        } 
+        else {
+          
+          if (! this.blnEdit && resp.position > 0) {
+            this.elementService.addElement(resp).subscribe(() => {
+              this.getElements();
+              console.log('Elemento Incluido!');
+            }, (error) => {
+              console.error('Erro ao adicionar usuário:', error);
+            });
+
+            
+          }
+        }
+        
+      } else {
+        console.log('Elemento não EDITADO!');
+      } 
+    });
+  }
 }

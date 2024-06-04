@@ -1,11 +1,11 @@
 import { Component, ViewChild, AfterViewInit, ChangeDetectorRef} from '@angular/core';
-import { MaterialModule } from '../material.module';
+import { MatTable } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { MaterialModule } from '../material.module';
 import { DialogComponent } from '../_models/dialog/dialog.component';
-import { MatInput } from '@angular/material/input';
 import { Category } from '../_models/category';
 import { CategoryEditComponent } from '../category.edit/category.edit.component';
-import { MatTable } from '@angular/material/table';
+
 
 export interface PeriodicElement {
   position: number;
@@ -30,7 +30,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [MaterialModule, DialogComponent, MatInput, CategoryEditComponent],
+  imports: [MaterialModule, DialogComponent, CategoryEditComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
  })
@@ -44,9 +44,7 @@ export class CategoryComponent {
 
   public dataSource = ELEMENT_DATA;
     
-  constructor(private dialog: MatDialog, 
-              private cdr: ChangeDetectorRef) { }
-  
+  constructor(private dialog: MatDialog) { }
   
   openDialog(inputCategory: Category | null): void {
       const dialogRef = this.dialog.open(CategoryEditComponent, {
@@ -72,20 +70,12 @@ export class CategoryComponent {
             console.log(positionExists);
 
             if (! this.blnEdit && resp.position > 0) {
-              //this.cdr.detectChanges();
               this.dataSource.push(resp);
               this.tableRef.renderRows();
               console.log('Elemento Incluido!');
             }
           }
           
-          // Se os dados foram retornados do modal, atualize o dataSource
-          /*
-          console.log(tableResp.position)
-          console.log(tableResp.name)
-          console.log(tableResp.weight)
-          console.log(tableResp.symbol)*/
-
         } else {
           console.log('Elemento não EDITADO!');
         }

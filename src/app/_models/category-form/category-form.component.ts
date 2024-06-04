@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Category } from '../category';
+import { Element } from '../Element';
 import { MatError } from '@angular/material/form-field';
 import { MatCommonModule } from '@angular/material/core';
 
@@ -26,7 +27,8 @@ export class CategoryFormComponent implements OnInit{
  
 
   @Input() public actionName = 'Fixo';
-  @Input() public editableCategory!: Category;
+  //@Input() public editableCategory!: Category;
+  @Input() public editableCategory!: Element;
 
   
   constructor(public formBuilder: FormBuilder,
@@ -40,6 +42,7 @@ export class CategoryFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
+      id: [this.editableCategory != null ? this.editableCategory.id : ''],
       position: [this.editableCategory != null ? this.editableCategory.position : '', Validators.required],
       name: [this.editableCategory != null ? this.editableCategory.name :'', Validators.required],
       weight: [this.editableCategory != null ? this.editableCategory.weight : '', Validators.required],

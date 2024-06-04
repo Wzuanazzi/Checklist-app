@@ -24,22 +24,22 @@ export class AutorizacaoService implements OnInit{
   // Método para Limpar storageLocal
   deslogar(){
     
-    if (typeof localStorage === 'undefined') {
+    if (typeof sessionStorage === 'undefined') {
       console.warn('localStorage is not available');
      // return null;
     }else
-      localStorage?.clear();
+      sessionStorage?.clear();
   }
 
    // Método para obter o estado do usuário 
    getUserState(): any {
-    if (typeof localStorage === 'undefined') {
+    if (typeof sessionStorage === 'undefined') {
       console.warn('localStorage is not available');
       return null;
     }
   
     console.log("getUserState");
-    const state = localStorage.getItem(this.storageKey);
+    const state = sessionStorage.getItem(this.storageKey);
     return state ? JSON.parse(state) : null;
     
   }
@@ -47,7 +47,7 @@ export class AutorizacaoService implements OnInit{
   // Método para definir o estado do usuário
   setUserState(state: any): void {
     console.log("setUserState");
-    localStorage.setItem(this.storageKey, JSON.stringify(state));
+    sessionStorage.setItem(this.storageKey,  JSON.stringify(state));
   }
 
 

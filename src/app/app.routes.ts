@@ -14,6 +14,6 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'teste', component: TestComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'element', component: ElementComponent },
+    { path: 'element', component: ElementComponent, canActivate: [autorizacaoGuard] },
     { path: '**', component: HomeComponent}
 ];
