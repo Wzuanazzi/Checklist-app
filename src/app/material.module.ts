@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BtnpadraoComponent } from './_models/btnpadrao/btnpadrao.component';
 
 
 @NgModule({
@@ -25,14 +26,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink, MatTable, MatSlideToggleModule,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav,
+              MatInputModule, MatDividerModule, MatSidenav, BtnpadraoComponent,
               ReactiveFormsModule, MatError, ReactiveFormsModule, RouterOutlet,
               MatFormField, MatInput, MatMenuModule,  CommonModule, HttpClientModule] ,
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink, MatTable, MatSlideToggleModule,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav,
+              MatInputModule, MatDividerModule, MatSidenav, BtnpadraoComponent,
               ReactiveFormsModule,  MatError, ReactiveFormsModule, RouterOutlet,
               MatFormField, MatInput, MatMenuModule,CommonModule, HttpClientModule], 
 

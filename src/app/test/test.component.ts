@@ -1,10 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule, FormStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
-import { RouterLink } from '@angular/router';
 import {Dialog, DialogRef, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
-import { BtnpadraoComponent } from '../_models/btnpadrao/btnpadrao.component';
 
 export interface DialogData {
   animal: string;
@@ -14,7 +11,7 @@ export interface DialogData {
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule, FormsModule,  MaterialModule, RouterLink, DialogModule, BtnpadraoComponent],
+  imports: [MaterialModule, DialogModule],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
@@ -75,18 +72,20 @@ myBindingModel: any;
   }
 }
 
-@Component({
-  selector: 'cdk-dialog-overview-example-dialog',
-  templateUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.html',
-  styleUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.css',
-  standalone: true,
-  imports: [FormsModule],
-})
 
-export class CdkDialogOverviewExampleDialog {
-  constructor(
-    public dialogRef: DialogRef<string>,
-    @Inject(DIALOG_DATA) public data: DialogData,
-  ) {}
-}
+@Component({
+    selector: 'cdk-dialog-overview-example-dialog',
+    templateUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.html',
+    styleUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.css',
+    standalone: true,
+    imports: [FormsModule],
+  })
+  
+  export class CdkDialogOverviewExampleDialog {
+    constructor(
+      public dialogRef: DialogRef<string>,
+      @Inject(DIALOG_DATA) public data: DialogData,
+    ) {}
+  }
+
 

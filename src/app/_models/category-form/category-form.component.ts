@@ -43,7 +43,7 @@ export class CategoryFormComponent implements OnInit{
       id: [this.editableCategory != null ? this.editableCategory.id : ''],
       position: [this.editableCategory != null ? this.editableCategory.position : '', [Validators.required, Validators.min(1)]],
       name: [this.editableCategory != null ? this.editableCategory.name :'', [Validators.required, Validators.minLength(4)]],
-      weight: [this.editableCategory != null ? this.editableCategory.weight : '', [Validators.required, Validators.max(8)]],
+      weight: [this.editableCategory != null ? this.editableCategory.weight : '', [Validators.required]],
       symbol: [this.editableCategory != null ? this.editableCategory.symbol : '',Validators.required]
       });
   
