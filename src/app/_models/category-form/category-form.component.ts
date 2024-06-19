@@ -1,9 +1,9 @@
-import { Component, Inject, Input, OnInit, Output, output } from '@angular/core';
+import { Component, Inject, Input, OnInit, Output, inject, output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { Category } from '../category';
-import { Element } from '../Element';
+import { Element } from '../elements';
 import { MatError } from '@angular/material/form-field';
 import { MatCommonModule } from '@angular/material/core';
 
@@ -27,10 +27,8 @@ export class CategoryFormComponent implements OnInit{
  
 
   @Input() public actionName = 'Fixo';
-  //@Input() public editableCategory!: Category;
   @Input() public editableCategory!: Element;
 
-  
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<CategoryFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any ){
@@ -43,11 +41,12 @@ export class CategoryFormComponent implements OnInit{
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
       id: [this.editableCategory != null ? this.editableCategory.id : ''],
-      position: [this.editableCategory != null ? this.editableCategory.position : '', Validators.required],
-      name: [this.editableCategory != null ? this.editableCategory.name :'', Validators.required],
-      weight: [this.editableCategory != null ? this.editableCategory.weight : '', Validators.required],
-      symbol: this.editableCategory != null ? this.editableCategory.symbol : '',
+      position: [this.editableCategory != null ? this.editableCategory.position : '', [Validators.required, Validators.min(1)]],
+      name: [this.editableCategory != null ? this.editableCategory.name :'', [Validators.required, Validators.minLength(4)]],
+      weight: [this.editableCategory != null ? this.editableCategory.weight : '', [Validators.required, Validators.max(8)]],
+      symbol: [this.editableCategory != null ? this.editableCategory.symbol : '',Validators.required]
       });
+  
       console.log("validators ativado");
     }
 

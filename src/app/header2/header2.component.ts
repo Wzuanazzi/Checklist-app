@@ -27,7 +27,6 @@ export class Header2Component {
   
   get loginRead() {
     return this.autorizacaoService.statusLogin()
-    //return this.globalService.getLoginRead();
   }
 
   checkLoginRead() {

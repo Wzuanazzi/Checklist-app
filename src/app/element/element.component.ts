@@ -3,7 +3,7 @@ import { DialogComponent } from '../_models/dialog/dialog.component';
 import { MaterialModule } from '../material.module';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { Element } from '../_models/Element';
+import { Element } from '../_models/elements';
 import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { CommonModule } from '@angular/common';
 import { ElementService } from '../_service/element.service';

@@ -56,11 +56,13 @@ export class CategoryComponent {
       dialogRef.afterClosed().subscribe(resp => {
         if (resp !== undefined) {
           const tableResp : Category = resp;
+
           console.log(resp.position -1);
 
           if (this.blnEdit && this.dataSource.map(p => p.position).includes(resp.position)) {
               this.dataSource[resp.position -1] = resp;
               this.tableRef.renderRows();
+
               console.log('Elemento Editado!');
           } 
           else {
@@ -77,6 +79,7 @@ export class CategoryComponent {
           }
           
         } else {
+
           console.log('Elemento não EDITADO!');
         }
       });
@@ -85,6 +88,7 @@ export class CategoryComponent {
 
   public editElement(inputCategory: Category | null): void  {
       this.blnEdit = true;
+      console.log(inputCategory);
       this.openDialog(inputCategory);
     }
 

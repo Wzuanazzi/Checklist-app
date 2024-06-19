@@ -4,7 +4,6 @@ import { MaterialModule } from '../../material.module';
 import { AutorizacaoService } from '../../_service/autorizacao.service';
 import { GlobalService } from '../../_service/global.service';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -17,12 +16,8 @@ import { GlobalService } from '../../_service/global.service';
 
 export class LoginComponent implements OnInit{
 
-  //user!: SocialUser;
-  //loggedIn!: boolean;
-
   constructor(private autorizacaoService:AutorizacaoService,
               private globalService: GlobalService, // Injetando o GlobalService
-              //private authService:SocialAuthService
             ) {  }
 
   public descricaoLogin !: string
@@ -36,22 +31,10 @@ export class LoginComponent implements OnInit{
         this.descricaoLogin = "Não Autorizado";
       }
 
-      //this.authService.authState.subscribe((user) => {
-      // console.log(user)});
-      
-      /*
-      this.authService.authState.subscribe((user) => {
-        this.user = user;
-        this.loggedIn = (user != null);
-        
-      });*/
-
       console.log(this.descricaoLogin);
   }
 
-  
   clickLogin(){
-    //if (this.autorizacaoService.statusLogin()) {
     if (this.autorizacaoService.statusLogin()) {
       this.autorizacaoService.deslogar();
       this.descricaoLogin = "Não Autorizado";
@@ -62,6 +45,7 @@ export class LoginComponent implements OnInit{
       this.globalService.setLoginRead(true); // Atualizando o valor de loginread
     }
   };
+}
 
 /*
   signInWithGoogle(): void {
@@ -76,6 +60,6 @@ export class LoginComponent implements OnInit{
     this.authService.signOut();
   }
 */
-}
+
 
 

@@ -6,15 +6,21 @@
 
   <app-header2 [sidenav]="sidenav"> </app-header2>
 
-
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav class="w-p10 h-100">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="w-p10 h-p100">
       <mat-list>
 
         <mat-list-item (click)="sidenav.toggle()">
           <mat-icon>home</mat-icon>
           <span class="ml-15">
           <a [routerLink]="['/home']">Home</a>
+          </span>
+        </mat-list-item>
+
+        <mat-list-item (click)="sidenav.toggle()">
+          <mat-icon>home</mat-icon>
+          <span class="ml-15">
+          <a [routerLink]="['/testes']">Página de Testes</a>
           </span>
         </mat-list-item>
 

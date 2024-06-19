@@ -11,34 +11,29 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatError, MatFormField, MatInput, MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-
-
-//import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-//import { GoogleLoginProvider, FacebookLoginProvider } from '@abacritt/angularx-social-login';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
   
      imports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
-              MatTableModule, RouterLink, MatTable,
+              MatTableModule, RouterLink, MatTable, MatSlideToggleModule,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
               MatInputModule, MatDividerModule, MatSidenav,
-              ReactiveFormsModule, MatError, ReactiveFormsModule,
+              ReactiveFormsModule, MatError, ReactiveFormsModule, RouterOutlet,
               MatFormField, MatInput, MatMenuModule,  CommonModule, HttpClientModule] ,
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
-              MatTableModule, RouterLink, MatTable,
+              MatTableModule, RouterLink, MatTable, MatSlideToggleModule,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
               MatInputModule, MatDividerModule, MatSidenav,
-              ReactiveFormsModule,  MatError, ReactiveFormsModule,
+              ReactiveFormsModule,  MatError, ReactiveFormsModule, RouterOutlet,
               MatFormField, MatInput, MatMenuModule,CommonModule, HttpClientModule], 
 
               providers: [

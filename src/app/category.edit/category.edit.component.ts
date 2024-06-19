@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryFormComponent } from '../_models/category-form/category-form.component';
 import { Category } from '../_models/category';
-import { Element } from '../_models/Element';
+
 
 
 @Component({
@@ -17,7 +17,7 @@ export class CategoryEditComponent implements OnInit {
 
   @Input() public actionName = 'Editar';
 
-  public editableCategory!: Element;
+  public editableCategory!: Category;
 
   constructor(private dialoRef: MatDialogRef<CategoryEditComponent>,
              @Inject(MAT_DIALOG_DATA) dialogData: any) 

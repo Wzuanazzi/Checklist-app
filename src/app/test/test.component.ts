@@ -1,15 +1,20 @@
-
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule, FormStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { RouterLink } from '@angular/router';
+import {Dialog, DialogRef, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
+import { BtnpadraoComponent } from '../_models/btnpadrao/btnpadrao.component';
 
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule, FormsModule,  MaterialModule, RouterLink],
+  imports: [CommonModule, FormsModule,  MaterialModule, RouterLink, DialogModule, BtnpadraoComponent],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
@@ -32,9 +37,24 @@ export class TestComponent {
     { descricao: 'Item 4', id : 4}
   ];
   
+  animal: string | undefined;
+  name!: string;
+
 myBindingModel: any;
 
-  constructor() {}
+  constructor(public dialog: Dialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open<string>(CdkDialogOverviewExampleDialog, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.closed.subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
   ngOninit(): void {
 
@@ -53,5 +73,20 @@ myBindingModel: any;
     if(this.isDisabled) this.isDisabled = false;
     else this.isDisabled = true; 
   }
-
 }
+
+@Component({
+  selector: 'cdk-dialog-overview-example-dialog',
+  templateUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.html',
+  styleUrl: '../cdk-dialog-overview-example/cdk-dialog-overview-example.component.css',
+  standalone: true,
+  imports: [FormsModule],
+})
+
+export class CdkDialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: DialogRef<string>,
+    @Inject(DIALOG_DATA) public data: DialogData,
+  ) {}
+}
+

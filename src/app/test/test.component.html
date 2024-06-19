@@ -1,3 +1,10 @@
+<btnpadrao typeBtn = "solid-primary"  class="ml-15" > </btnpadrao> 
+
+<btnpadrao typeBtn = "outline-primary" class="ml-15"> </btnpadrao> 
+
+<btnpadrao typeBtn = "outline-secondary" class="ml-15"> </btnpadrao> 
+
+
 <div style="margin: 20px; border: 2px solid black;">
     <h1 *ngIf="showTitle">Isso é um teste</h1>
     <p><button (click)="changeButtonDisplayStatus()">Exibir Titulo</button></p>
@@ -32,9 +39,29 @@
 <!--*
 <app-category></app-category> "-->
 
-<label>Texto Binding</label>
-<input type="text" [(ngModel)]="valorTexto" >
-<span>{{valorTexto}}</span> 
+<div class="container">
+    <div class="item">
+        <label>Texto Binding</label>
+        <input type="text" [(ngModel)]="valorTexto" >
+        <span>{{valorTexto}}</span> 
+    </div>
+    <div class="item">
+    <ol>
+        <li>
+          <label id="dialog-user-name">What's your name?</label>
+          <input for="dialog-user-name" [(ngModel)]="name">
+        </li>
+        <li>
+          <button (click)="openDialog()">Pick one</button>
+        </li>
+        @if (animal) {
+          <li>
+            You chose: <em>{{animal}}</em>
+          </li>
+        }
+      </ol>
+    </div>
+</div>
 
 
 

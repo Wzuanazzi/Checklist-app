@@ -1,7 +1,4 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from './material.module';
 import { Header2Component } from "./header2/header2.component";
@@ -12,8 +9,7 @@ import { Header2Component } from "./header2/header2.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ReactiveFormsModule,
-              FooterComponent, HeaderComponent,
+    imports: [FooterComponent, 
               MaterialModule, Header2Component]
 })
 
@@ -29,14 +25,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-/*
-    if (typeof localStorage === 'undefined') {
-     console.log('localStorage is not available');
-    } else {
-      console.log('localStorage clear');
-      localStorage.clear();
-    }
-  */ 
              
   }
   
